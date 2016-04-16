@@ -50,4 +50,17 @@ describe('smoke tests', () => {
     }
     realB('throw check did throw', didThrow);
   });
+
+  it('should reject if passed a different falsy value', () => {
+    baddsert('falsy check', false);
+    let didThrow = true;
+    try {
+      baddsert('falsy check', undefined);
+      didThrow = false;
+    } catch (e) {
+      // pants: Expected pants to equal super llama.
+      realB('falsy reject', e.message);
+    }
+    realB('falsy reject did throw', didThrow);
+  })
 });

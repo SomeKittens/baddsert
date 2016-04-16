@@ -16,7 +16,7 @@ export let baddsertInject = getStoredResults => {
         console.warn(`Symbol matching is only supported via .toString(): ${data}`);
       }
 
-      if (stored[label] && stored[label].reference) {
+      if (stored[label] && stored[label].hasOwnProperty('reference')) {
         try {
           deepStrictEqual(stored[label].reference, data);
         } catch (e) {
