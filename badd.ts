@@ -24,7 +24,7 @@ export let baddsertInject = getStoredResults => {
           throw new Error(`${label}: Expected ${data.toString()} to equal ${stored[label].reference}.`);
         }
       } else {
-        console.log(`Making new entry for ${label}`);
+        console.log(`Making new entry for ${label}, populated with ${data}`);
         stored[label] = {
           _meta: {
             type: typeof data
