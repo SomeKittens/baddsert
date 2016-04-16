@@ -1,0 +1,22 @@
+{
+  "name": "baddsert",
+  "version": "0.0.1",
+  "description": "Baseline Acceptance Driven Development for JavaScript",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "test": "mocha dist/test",
+    "test:watch": "mocha --watch dist/test"
+  },
+  "keywords": [],
+  "typings": "dist/index",
+  "author": "Randall Koutnik <npm@rkoutnik.com> (https://rkoutnik.com/)",
+  "license": "MIT",
+  "dependencies": {
+    "typescript": "^1.8.9"
+  },
+  "devDependencies": {
+    "mocha": "^2.4.5"
+  }
+}
