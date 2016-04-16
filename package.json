@@ -9,6 +9,7 @@
     "snyk": "snyk test",
     "lint": "tslint *.ts && tslint test/*.ts",
     "test": "mocha dist/test",
+    "prepublish": "npm run build",
     "test:watch": "mocha --watch dist/test"
   },
   "keywords": [],
