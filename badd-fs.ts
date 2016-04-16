@@ -12,7 +12,7 @@ let stringify = require('node-stringify');
 // When we're first called, ensure the badd dir exists
 let dir;
 let dirName = 'badd-baseline';
-dir = join(__dirname, dirName);
+dir = join('./', dirName);
 
 try {
   fs.statSync(dir);
