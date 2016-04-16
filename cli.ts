@@ -20,6 +20,11 @@ Object.keys(allResults)
   .forEach(subKey => {
     let result = resultSet[subKey];
 
+    if (!result.current) {
+      console.log(`   ${subKey}: No previous value (this is fine)`);
+      return;
+    }
+
     try {
       deepStrictEqual(result.reference, result.current);
 
