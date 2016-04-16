@@ -17,7 +17,7 @@ let docTests = baddsert('docTests');
 
 ```
 
-Once you have the instance we are calling it `docTests` you can then use it as you would use assert. Here the first parameter describes the assertion (What are you testing). The second parameter is the value you want to be asserted.
+Once you have the instance we are calling it `docTests`, you can then use it as you would use `assert`. Here the first parameter describes the assertion (What are you testing ?). The second parameter is the value you want to be asserted.
 
 ```typescript
 
@@ -28,7 +28,7 @@ it('runs a superfluous demo test', () => {
 
 ```
 
-Notice there wasn't a comparator or expected value statement, that is because `baddsert` will take the result from the first test and save it under the `badd-baseline` directory (In this case we defined it as the file `docTests`). Future tests will now throw if the second argument is not `deepStrictEqual` to the saved version.
+Notice there wasn't an explicit expected value passed to `docTests`, that is because `baddsert` will take the result from the first test and save it under the `badd-baseline` directory (In this case we defined it as the file `docTests`). Future tests will now throw if the second argument is not `deepStrictEqual` to the stored version.
 
 In future when you change your API and the tests fail the tests with the correct value. Run `baddsert` as CLI in your `badd-baseline` directory. This will run through all of your assertions, letting you replace the old data with the data returned in the failing test.
 
