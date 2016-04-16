@@ -6,10 +6,19 @@
   "scripts": {
     "build": "tsc",
     "build:watch": "tsc --watch",
+    "snyk": "snyk test",
+    "lint": "tslint *.ts && tslint test/*.ts",
     "test": "mocha dist/test",
     "test:watch": "mocha --watch dist/test"
   },
   "keywords": [],
+  "bugs": {
+    "url": "https://github.com/SomeKittens/baddsert/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:SomeKittens/baddsert.git"
+  },
   "typings": "dist/index",
   "author": "Randall Koutnik <npm@rkoutnik.com> (https://rkoutnik.com/)",
   "license": "MIT",
@@ -18,7 +27,20 @@
     "typescript": "^1.8.9"
   },
   "devDependencies": {
-    "mocha": "^2.4.5"
+    "mocha": "^2.4.5",
+    "snyk": "^1.14.0",
+    "tslint": "^3.7.4",
+    "typescript": "^1.8.10",
+    "validate-commit-msg": "^2.6.0"
   },
-  "bin": "./dist/cli"
+  "bin": "./dist/cli",
+  "engines": {
+    "node": ">=4.x.x"
+  },
+  "config": {
+    "ghooks": {
+      "pre-commit": "npm test -s && npm run lint -s",
+      "commit-msg": "validate-commit-msg"
+    }
+  }
 }

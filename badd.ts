@@ -1,6 +1,5 @@
 'use strict';
 
-import {getStoredResults} from './badd-fs';
 import {deepStrictEqual} from 'assert';
 
 // Some init thing

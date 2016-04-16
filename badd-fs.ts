@@ -18,7 +18,7 @@ try {
   fs.mkdirSync(dir);
 }
 
-if (!fs.statSync(dir).isDirectory()){
+if (!fs.statSync(dir).isDirectory()) {
   fs.mkdirSync(dir);
 }
 
@@ -53,8 +53,8 @@ export let save = (filename, info) => {
 
 // Keeping for reasons
 export class BaddFile {
-  asserts;
-  fullPath
+  asserts: any;
+  fullPath: any;
   constructor (fileName) {
     this.fullPath = join(dir, fileName);
     try {
@@ -69,7 +69,7 @@ export class BaddFile {
       this.save();
     });
   }
-  save () {
+  save (): void {
     fs.writeFileSync(this.fullPath, JSON.stringify(this.asserts));
   }
 }

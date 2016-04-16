@@ -15,7 +15,8 @@ describe('smoke tests', () => {
   beforeEach(() => {
     mockStore = {};
     baddsert = baddsertInject(() => mockStore)('test');
-  })
+  });
+
   it('creates new items if not found', () => {
     baddsert('some pants', 'llama');
     realB('basic assert', mockStore);
