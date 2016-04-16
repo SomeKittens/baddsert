@@ -37,7 +37,19 @@ export let getStoredResults = (fileName: string) => {
     fs.writeFileSync(fullPath, JSON.stringify(asserts));
   });
   return asserts;
-}
+};
+
+export let getAllResults = () => {
+  return fs.readdirSync(dir)
+  .reduce((prev, filename) => {
+    prev[filename] = JSON.parse(fs.readFileSync(join(dir, filename), 'utf-8'));
+    return prev;
+  }, {});
+};
+
+export let save = (filename, info) => {
+  fs.writeFileSync(join(dir, filename), JSON.stringify(info));
+};
 
 // Keeping for reasons
 export class BaddFile {

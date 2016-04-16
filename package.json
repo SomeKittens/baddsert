@@ -14,9 +14,11 @@
   "author": "Randall Koutnik <npm@rkoutnik.com> (https://rkoutnik.com/)",
   "license": "MIT",
   "dependencies": {
+    "readline-sync": "^1.4.1",
     "typescript": "^1.8.9"
   },
   "devDependencies": {
     "mocha": "^2.4.5"
-  }
+  },
+  "bin": "./dist/cli"
 }
