@@ -2,7 +2,7 @@
 
 Framework for baseline acceptance driven development in JavaScript.
 
-General idea: Maintaining tests is hard. With every change you make in your API, all the associated tests fail and need to be updated manually. Automating the process of updating these tests can reduce manual effort and manual errors.
+General idea: Maintaining tests is hard. With every change you make in your API, all the associated tests need to be updated manually. Automating this process can reduce manual effort and manual errors.
 
 `baddsert` keeps track of failures and allows you to update the expected data without having to update the entire test battery by hand.
 
@@ -20,10 +20,12 @@ let docTests = baddsert('docTests');
 Once you have the instance we are calling it `docTests` you can then use it as you would use assert. Here the first parameter describes the assertion (What are you testing). The second parameter is the value you want to be asserted.
 
 ```typescript
+
 it('runs a superfluous demo test', () => {
   const result = hammertime(`can't touch this`);
   docTests('I am a steg-o-sarus', result);
 });
+
 ```
 
 Notice there wasn't a comparator or expected value statement, that is because `baddsert` will take the result from the first test and save it under the `badd-baseline` directory (In this case we defined it as the file `docTests`). Future tests will now throw if the second argument is not `deepStrictEqual` to the saved version.
