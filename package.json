@@ -4,7 +4,7 @@
   "description": "Baseline Acceptance Driven Development for JavaScript",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "typings install && tsc",
     "build:watch": "tsc --watch",
     "snyk": "snyk test",
     "lint": "tslint *.ts && tslint test/*.ts",
@@ -32,6 +32,7 @@
     "snyk": "^1.14.0",
     "tslint": "^3.7.4",
     "typescript": "^1.8.10",
+    "typings": "^0.7.12",
     "validate-commit-msg": "^2.6.0"
   },
   "bin": "./dist/cli",
