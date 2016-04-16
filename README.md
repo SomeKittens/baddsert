@@ -7,3 +7,5 @@ General idea: It's annoying to maintain tests.  Every time you change an api, al
 BADD keeps tracks of the new info on failures and allows you to automagically update the expected data.
 
 `// TODO: Real docs`
+
+Further reading: https://medium.com/@tinganho/baseline-acceptance-driven-development-f39f7010a04#.d1fdg36x0
