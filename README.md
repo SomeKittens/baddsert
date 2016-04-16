@@ -2,38 +2,35 @@
 
 Framework for baseline acceptance driven development in JavaScript.
 
-General idea: It's annoying to maintain tests.  Every time you change an api, all the tests fail and they need to be manually updated.
+General idea: Maintaining tests is hard. With every change you make in your API, all the associated tests need to be updated manually. Automating this process can reduce manual effort and manual errors.
 
-BADD keeps tracks of the new info on failures and allows you to automagically update the expected data.
+`baddsert` keeps track of failures and allows you to update the expected data without having to update the entire test battery by hand.
 
-### Use
 
-baddsert replaces your old assert library.  Write your tests as usual, using baddsert as the assert.  Step one is to init the whole shebang:
+### Usage
+`baddsert` is designed to in place replace `assert` library. You will first need to create an instance of  `baddsert`. It is recommended that you name it descriptive of your test battery.
 
 ```typescript
-import {baddsert} from 'baddsert';
 
+import {baddsert} from 'baddsert';
 let docTests = baddsert('docTests');
+
 ```
 
-You'll need to init once per file.  Try and make it descriptive of that particular test battery.
-
-Now that everything's all init-ifyed, let's use baddsert:
+Once you have the instance we are calling it `docTests`, you can then use it as you would use `assert`. Here the first parameter describes the assertion (What are you testing ?). The second parameter is the value you want to be asserted.
 
 ```typescript
+
 it('runs a superfluous demo test', () => {
-  let result = hammertime(`can't touch this`);
+  const result = hammertime(`can't touch this`);
   docTests('I am a steg-o-sarus', result);
 });
+
 ```
 
-The first param describes this particular assertion - what are you testing?
+Notice there wasn't an explicit expected value passed to `docTests`, that is because `baddsert` will take the result from the first test and save it under the `badd-baseline` directory (In this case we defined it as the file `docTests`). Future tests will now throw if the second argument is not `deepStrictEqual` to the stored version.
 
-The second is the thing you want asserted.
-
-And now, the magic happens.  When you run your tests, baddsert will take the result from the first test and save it under the `badd-baseline` directory (in this case, as the file `docTests`).  Future runs will throw if the value passed in is not `deepStrictEqual` to the original one.
-
-When you inevitably change something that makes the tests fail (because your function is correctly returning a new value) run `baddsert` in the same dir as your `badd-baseline` directory.  This will run through all of your asserts, letting you replace the old data with the data that was passed in during the failing test.
+In future when you change your API and the tests fail the tests with the correct value. Run `baddsert` as CLI in your `badd-baseline` directory. This will run through all of your assertions, letting you replace the old data with the data returned in the failing test.
 
 ```
 --- Checking docTests ---
@@ -43,6 +40,34 @@ Latest: NEW SWEET DATAS
 Should I replace this? [y/n] :
 ```
 
-Easy as pie.
+### Installation 
+You can either install the baddsert cli globally 
 
-Further reading: https://medium.com/@tinganho/baseline-acceptance-driven-development-f39f7010a04#.d1fdg36x0
+```sh
+$npm install -g baddsert
+```
+
+or by adding it as a dev dependency
+
+```sh
+$npm install --save --only=dev baddsert
+```
+
+When installing as a dev dependency it is recommended you add this to your npm scripts in your package.json
+
+```json
+{
+  "scripts": {
+    "baddsert": "./node_modules/.bin/baddsert"
+  }
+}
+```
+
+Then you can run baddsert by doing
+
+```sh
+$npm run baddsert
+```
+
+
+You can read more about "baseline acceptance driven development" at https://medium.com/@tinganho/baseline-acceptance-driven-development-f39f7010a04#.d1fdg36x0
