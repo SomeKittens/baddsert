@@ -62,5 +62,9 @@ describe('smoke tests', () => {
       realB('falsy reject', e.message);
     }
     realB('falsy reject did throw', didThrow);
-  })
+  });
+
+  it('should persist an undefined item', () => {
+    realB('undef', undefined);
+  });
 });

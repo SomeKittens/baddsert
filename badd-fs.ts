@@ -6,6 +6,8 @@
 
 import * as fs from 'fs';
 import {join} from 'path';
+// import stringify from 'node-stringify';
+let stringify = require('node-stringify');
 
 // When we're first called, ensure the badd dir exists
 let dir;
@@ -22,19 +24,23 @@ if (!fs.statSync(dir).isDirectory()) {
   fs.mkdirSync(dir);
 }
 
-export let getStoredResults = (fileName: string) => {
-  let fullPath = join(dir, fileName);
+let loadFile = (filename: string) => {
+  return eval(fs.readFileSync(join(dir, filename), 'utf-8'));
+};
+
+export let getStoredResults = (filename: string) => {
+  let fullPath = join(dir, filename);
   let asserts;
   try {
     fs.statSync(fullPath);
-    asserts = JSON.parse(fs.readFileSync(fullPath, 'utf-8'));
+    asserts = loadFile(filename);
   } catch (e) {
     /* doesn't exist, we'll make it later */
     asserts = {};
   }
 
   process.on('exit', () => {
-    fs.writeFileSync(fullPath, JSON.stringify(asserts));
+    fs.writeFileSync(fullPath, stringify(asserts));
   });
   return asserts;
 };
@@ -42,24 +48,24 @@ export let getStoredResults = (fileName: string) => {
 export let getAllResults = () => {
   return fs.readdirSync(dir)
   .reduce((prev, filename) => {
-    prev[filename] = JSON.parse(fs.readFileSync(join(dir, filename), 'utf-8'));
+    prev[filename] = loadFile(filename);
     return prev;
   }, {});
 };
 
 export let save = (filename, info) => {
-  fs.writeFileSync(join(dir, filename), JSON.stringify(info));
+  fs.writeFileSync(join(dir, filename), stringify(info));
 };
 
 // Keeping for reasons
 export class BaddFile {
   asserts: any;
   fullPath: any;
-  constructor (fileName) {
-    this.fullPath = join(dir, fileName);
+  constructor (filename) {
+    this.fullPath = join(dir, filename);
     try {
       fs.statSync(this.fullPath);
-      this.asserts = JSON.parse(fs.readFileSync(this.fullPath, 'utf-8'));
+      this.asserts = eval(fs.readFileSync(this.fullPath, 'utf-8'));
     } catch (e) {
       /* doesn't exist, we'll make it later */
       this.asserts = {};
@@ -70,6 +76,6 @@ export class BaddFile {
     });
   }
   save (): void {
-    fs.writeFileSync(this.fullPath, JSON.stringify(this.asserts));
+    fs.writeFileSync(this.fullPath, stringify(this.asserts));
   }
 }
