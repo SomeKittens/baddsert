@@ -43,6 +43,37 @@ Latest: NEW SWEET DATAS
 Should I replace this? [y/n] :
 ```
 
+### Installation 
+You can either install the baddsert cli globally 
+
+```sh
+$npm install -g baddsert
+```
+
+or by adding it as a dev dependency
+
+```sh
+$npm install --save --only=dev baddsert
+```
+
+When installing as a dev dependency it is recommended you add this to your npm scripts in your package.json
+
+```json
+{
+  "scripts": {
+    "baddsert": "./node_modules/.bin/baddsert"
+  }
+}
+```
+
+Then you can run baddsert by doing
+
+```sh
+$npm run baddsert
+```
+
+
+
 Easy as pie.
 
 Further reading: https://medium.com/@tinganho/baseline-acceptance-driven-development-f39f7010a04#.d1fdg36x0
