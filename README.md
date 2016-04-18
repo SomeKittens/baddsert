@@ -23,7 +23,7 @@ Now that everything's all init-ifyed, let's use baddsert:
 ```typescript
 it('runs a superfluous demo test', () => {
   let result = hammertime(`can't touch this`);
-  docTests('I am a steg-o-sarus', result);
+  docTests('I am a steg-o-saurus', result);
 });
 ```
 
