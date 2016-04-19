@@ -69,7 +69,7 @@ describe('smoke tests', () => {
     realB('undef', undefined);
   });
 
-  it.only('allows the user to pass a different comparator', () => {
+  it('allows the user to pass a different comparator', () => {
     let didThrow = true;
     try {
       baddsert('diff comparator', 'moosle0');

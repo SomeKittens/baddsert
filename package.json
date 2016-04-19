@@ -24,6 +24,7 @@
   "author": "Randall Koutnik <npm@rkoutnik.com> (https://rkoutnik.com/)",
   "license": "MIT",
   "dependencies": {
+    "js-beautify": "^1.6.2",
     "readline-sync": "^1.4.1",
     "typescript": "^1.8.9"
   },

@@ -6,6 +6,8 @@
 
 import * as fs from 'fs';
 import {join} from 'path';
+import {js_beautify as jsBeautify} from 'js-beautify';
+
 // import stringify from 'node-stringify';
 let stringify = require('node-stringify');
 
@@ -25,7 +27,11 @@ if (!fs.statSync(dir).isDirectory()) {
 }
 
 let loadFile = (filename: string) => {
-  return eval(fs.readFileSync(join(dir, filename), 'utf-8'));
+  return eval(fs.readFileSync(join(dir, filename + '.js'), 'utf-8'));
+};
+
+export let save = (filename, info) => {
+  fs.writeFileSync(join(dir, filename + '.js'), jsBeautify(stringify(info)));
 };
 
 export let getStoredResults = (filename: string) => {
@@ -40,7 +46,7 @@ export let getStoredResults = (filename: string) => {
   }
 
   process.on('exit', () => {
-    fs.writeFileSync(fullPath, stringify(asserts));
+    save(filename, asserts);
   });
   return asserts;
 };
@@ -52,30 +58,3 @@ export let getAllResults = () => {
     return prev;
   }, {});
 };
-
-export let save = (filename, info) => {
-  fs.writeFileSync(join(dir, filename), stringify(info));
-};
-
-// Keeping for reasons
-export class BaddFile {
-  asserts: any;
-  fullPath: any;
-  constructor (filename) {
-    this.fullPath = join(dir, filename);
-    try {
-      fs.statSync(this.fullPath);
-      this.asserts = eval(fs.readFileSync(this.fullPath, 'utf-8'));
-    } catch (e) {
-      /* doesn't exist, we'll make it later */
-      this.asserts = {};
-    }
-
-    process.on('exit', () => {
-      this.save();
-    });
-  }
-  save (): void {
-    fs.writeFileSync(this.fullPath, stringify(this.asserts));
-  }
-}

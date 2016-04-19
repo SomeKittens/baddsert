@@ -1,4 +1,4 @@
-// Need this otherwise the build breaks, blah
+// Need these otherwise the build breaks, blah
 
 declare namespace readlineSync {
   export function keyInYN(a: string): boolean;
@@ -6,6 +6,14 @@ declare namespace readlineSync {
 
 declare module 'readline-sync' {
   export = readlineSync;
+}
+
+declare namespace jsBeautify {
+  export function js_beautify(a: string): string;
+}
+
+declare module 'js-beautify' {
+  export = jsBeautify;
 }
 
 
