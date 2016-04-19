@@ -3,7 +3,7 @@
 import {deepStrictEqual} from 'assert';
 
 export interface IComparator {
-  (a: any, b: any): boolean
+  (a: any, b: any): boolean;
 }
 
 let maybeToString = item => {
