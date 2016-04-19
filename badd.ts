@@ -6,10 +6,10 @@ import {deepStrictEqual} from 'assert';
 // Gets a label, creates a file named that in the above folder
 // returns baddsert
 export let baddsertInject = getStoredResults => {
-  return fileName => {
+  return (fileName: string): Function => {
     let stored = getStoredResults(fileName);
 
-    return (label: string, data) => {
+    return (label: string, data: any): void => {
       // Mreh.  TODO: Better way to handle symbols
       if (typeof data === 'symbol') {
         data = data.toString();
