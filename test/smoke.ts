@@ -65,6 +65,24 @@ describe('smoke tests', () => {
   });
 
   it('should persist an undefined item', () => {
+    // No check, just reading test output, yeaaaahhh...
     realB('undef', undefined);
+  });
+
+  it.only('allows the user to pass a different comparator', () => {
+    let didThrow = true;
+    try {
+      baddsert('diff comparator', 'moosle0')
+      baddsert('diff comparator', 'moosle', (a, b) => {
+        realB('comparator a', a);
+        realB('comparator b', b);
+
+        return false;
+      });
+      didThrow = false;
+    } catch (e) {
+      realB('comparator reject', e.message);
+    }
+    realB('comparator didThrow', didThrow);
   });
 });

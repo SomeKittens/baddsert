@@ -31,6 +31,8 @@ The first param describes this particular assertion - what are you testing?
 
 The second is the thing you want asserted.
 
+There's an optional third param that allows you to define your own equality.  Otherwise baddsert will just use `deepStrictEqual` from Node's assert package.
+
 And now, the magic happens.  When you run your tests, baddsert will take the result from the first test and save it under the `badd-baseline` directory (in this case, as the file `docTests`).  Future runs will throw if the value passed in is not `deepStrictEqual` to the original one.
 
 When you inevitably change something that makes the tests fail (because your function is correctly returning a new value) run `baddsert` in the same dir as your `badd-baseline` directory.  This will run through all of your asserts, letting you replace the old data with the data that was passed in during the failing test.
