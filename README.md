@@ -46,8 +46,7 @@ Should I replace this? [y/n] :
 ```
 
 ### Installation
-I
-nstall the baddsert cli globally:
+Install the baddsert cli globally:
 
 ```sh
 $ npm install -g baddsert
