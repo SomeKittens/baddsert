@@ -26,22 +26,25 @@ if (!fs.statSync(dir).isDirectory()) {
   fs.mkdirSync(dir);
 }
 
+let addJSSuffix = (filename: string): string => {
+  return filename.indexOf('.js') === (filename.length - 3) ? filename : filename + '.js';
+};
+
 let loadFile = (filename: string) => {
-  return eval(fs.readFileSync(join(dir, filename + '.js'), 'utf-8'));
+  return eval(fs.readFileSync(join(dir, addJSSuffix(filename)), 'utf-8'));
 };
 
 export let save = (filename, info) => {
-  fs.writeFileSync(join(dir, filename + '.js'), jsBeautify(stringify(info)));
+  fs.writeFileSync(join(dir, addJSSuffix(filename)), jsBeautify(stringify(info)));
 };
 
 export let getStoredResults = (filename: string) => {
-  let fullPath = join(dir, filename);
   let asserts;
   try {
-    fs.statSync(fullPath);
     asserts = loadFile(filename);
   } catch (e) {
     /* doesn't exist, we'll make it later */
+    console.warn('Could not find file', filename);
     asserts = {};
   }
 
