@@ -7,7 +7,6 @@
 
 import {baddsertInject} from '../badd';
 import {expect} from 'chai';
-import {inject} from '../mochaInject';
 
 
 describe('smoke tests', () => {
@@ -49,7 +48,7 @@ describe('smoke tests', () => {
       reference: 'super llama'
     };
 
-    function thrower () {
+    function thrower(): void {
       baddsert('pants', 'pants');
     }
 
@@ -58,7 +57,7 @@ describe('smoke tests', () => {
 
   it('should reject if passed a different falsy value', () => {
     baddsert('falsy check', false);
-    function thrower() {
+    function thrower(): void {
       baddsert('falsy check', undefined);
     }
 
@@ -79,7 +78,7 @@ describe('smoke tests', () => {
   });
 
   it('allows the user to pass a different comparator', () => {
-    function thrower () {
+    function thrower(): void {
       baddsert('diff comparator', 'moosle0');
       baddsert('diff comparator', 'moosle', (a, b) => {
         expect(a).to.equal('moosle0');

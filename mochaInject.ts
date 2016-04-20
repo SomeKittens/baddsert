@@ -5,7 +5,7 @@ let key;
 
 export let inject = () => {
   injected = true;
-  beforeEach(function () {
+  beforeEach(function (): void {
     key = [this.currentTest.title];
     let t = this.currentTest;
     while (t.parent && t.parent.title) {
@@ -21,4 +21,4 @@ export let getKey = () => {
     return [];
   }
   return key.slice();
-}
+};

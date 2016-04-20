@@ -12,7 +12,7 @@ import {keyInYN} from 'readline-sync';
 // Would that be a smarter idea in general?  Yes!
 // Will I, because I'm stubborn?  Also yes!
 let leftLog = (spaces: number, ...str: string[]): void => {
-  let spacing = new Array((spaces*2)+1).join(' ');
+  let spacing = new Array((spaces * 2) + 1).join(' ');
   console.log(spacing, ...str);
 };
 
@@ -46,7 +46,7 @@ let check = (resultSet, subKey) => {
     }
   }
   depth--;
-}
+};
 
 
 Object.keys(allResults)
