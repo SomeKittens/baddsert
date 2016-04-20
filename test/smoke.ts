@@ -2,12 +2,13 @@
 
 /**
  * Some smoke tests so I can be sure I didn't break everything
+ * Using chai's expect here so we don't get double-whammy'd by a bug causing tests to pass
  */
 
 import {baddsertInject} from '../badd';
-import {baddsert as realBadd} from '../index';
+import {expect} from 'chai';
+import {inject} from '../mochaInject';
 
-let realB = realBadd('test-actual');
 
 describe('smoke tests', () => {
   let mockStore;
@@ -19,7 +20,14 @@ describe('smoke tests', () => {
 
   it('creates new items if not found', () => {
     baddsert('some pants', 'llama');
-    realB('basic assert', mockStore);
+    expect(mockStore).to.deep.equal({
+     'some pants': {
+       '_meta': {
+         'type': 'string'
+       },
+       'reference': 'llama'
+     }
+   });
   });
 
   it('checks against old data and does fine', () => {
@@ -40,49 +48,47 @@ describe('smoke tests', () => {
       },
       reference: 'super llama'
     };
-    let didThrow = true;
-    try {
+
+    function thrower () {
       baddsert('pants', 'pants');
-      didThrow = false;
-    } catch (e) {
-      // pants: Expected pants to equal super llama.
-      realB('throw check', e.message);
     }
-    realB('throw check did throw', didThrow);
+
+    expect(thrower).to.throw(`pants: Expected 'pants' to equal 'super llama'.`);
   });
 
   it('should reject if passed a different falsy value', () => {
     baddsert('falsy check', false);
-    let didThrow = true;
-    try {
+    function thrower() {
       baddsert('falsy check', undefined);
-      didThrow = false;
-    } catch (e) {
-      // pants: Expected pants to equal super llama.
-      realB('falsy reject', e.message);
     }
-    realB('falsy reject did throw', didThrow);
+
+    expect(thrower).to.throw(`falsy check: Expected 'undefined' to equal 'false'.`);
   });
 
   it('should persist an undefined item', () => {
-    // No check, just reading test output, yeaaaahhh...
-    realB('undef', undefined);
+    baddsert('undef', undefined);
+
+    expect(mockStore).to.deep.equal({
+      undef: {
+        _meta: {
+          type: 'undefined'
+        },
+        reference: undefined
+      }
+    });
   });
 
   it('allows the user to pass a different comparator', () => {
-    let didThrow = true;
-    try {
+    function thrower () {
       baddsert('diff comparator', 'moosle0');
       baddsert('diff comparator', 'moosle', (a, b) => {
-        realB('comparator a', a);
-        realB('comparator b', b);
+        expect(a).to.equal('moosle0');
+        expect(b).to.equal('moosle');
 
         return false;
       });
-      didThrow = false;
-    } catch (e) {
-      realB('comparator reject', e.message);
     }
-    realB('comparator didThrow', didThrow);
+
+    expect(thrower).to.throw(`diff comparator: Expected 'moosle' to equal 'moosle0'`);
   });
 });

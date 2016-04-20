@@ -29,6 +29,7 @@
     "typescript": "^1.8.9"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
     "mocha": "^2.4.5",
     "node-stringify": "0.0.19",
     "snyk": "^1.14.0",
