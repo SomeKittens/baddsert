@@ -9,7 +9,7 @@ import {baddsert as realBadd} from '../index';
 
 let realB = realBadd('dogfood-basic');
 
-describe.only('dogfooding', () => {
+describe('dogfooding', () => {
   let mockStore;
   let baddsert;
   beforeEach(() => {

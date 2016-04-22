@@ -8,7 +8,9 @@
     "build:watch": "tsc --watch",
     "snyk": "snyk test",
     "lint": "tslint *.ts && tslint test/*.ts",
-    "test": "mocha --harmony dist/test",
+    "test": "mocha --harmony dist/test/!\\(inject.js\\)",
+    "test:inject": "node --harmony dist/testMochaInject",
+    "dog": "node --harmony dist/cli.js",
     "prepublish": "npm run build",
     "test:watch": "mocha --watch dist/test"
   },
