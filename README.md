@@ -1,5 +1,9 @@
 # baddsert
 
+[![Build Status](https://travis-ci.org/SomeKittens/baddsert.svg?branch=master)](https://travis-ci.org/SomeKittens/baddsert) [![npm](https://img.shields.io/npm/v/baddsert.svg?maxAge=2592000)](https://www.npmjs.com/package/baddsert)
+
+---
+
 Framework for baseline acceptance driven development in JavaScript.
 
 General idea: It's annoying to maintain tests.  Every time you change an api, all the tests fail and they need to be manually updated.
