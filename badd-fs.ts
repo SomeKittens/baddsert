@@ -30,11 +30,11 @@ let addJSSuffix = (filename: string): string => {
   return filename.indexOf('.js') === (filename.length - 3) ? filename : filename + '.js';
 };
 
-let loadFile = (filename: string) => {
+let loadFile = (filename: string): any => {
   return eval(fs.readFileSync(join(dir, addJSSuffix(filename)), 'utf-8'));
 };
 
-export let save = (filename, info) => {
+export let save = (filename: string, info): void => {
   fs.writeFileSync(join(dir, addJSSuffix(filename)), jsBeautify(stringify(info)) + '\n');
 };
 
@@ -54,7 +54,7 @@ export let getStoredResults = (filename: string) => {
   return asserts;
 };
 
-export let getAllResults = () => {
+export let getAllResults = (): any => {
   return fs.readdirSync(dir)
   .reduce((prev, filename) => {
     prev[filename] = loadFile(filename);
