@@ -71,7 +71,7 @@ export let baddsertInject = getStoredResults => {
         // User has not given us a reference value but is trying to assert against the current value
         // TODO: have two modes, strict and lax
 
-        console.warn('Attempting to assert value without setting reference, using previous value:' refObj.current);
+        console.warn('Attempting to assert value without setting reference, using previous value:', refObj.current);
         try {
           deepStrictEqual(refObj.current, data);
         } catch (e) {
