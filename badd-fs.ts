@@ -35,7 +35,7 @@ let loadFile = (filename: string) => {
 };
 
 export let save = (filename, info) => {
-  fs.writeFileSync(join(dir, addJSSuffix(filename)), jsBeautify(stringify(info)));
+  fs.writeFileSync(join(dir, addJSSuffix(filename)), jsBeautify(stringify(info)) + '\n');
 };
 
 export let getStoredResults = (filename: string) => {
