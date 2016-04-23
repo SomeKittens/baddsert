@@ -63,6 +63,7 @@ let check = (resultSet, subKey) => {
     leftLog(depth + 1, 'Latest result:', resultSet.current);
     if (keyInYNStrict('Should I replace this?')) {
       resultSet.reference = resultSet.current;
+      delete resultSet.current;
     }
   }
   depth--;

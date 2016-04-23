@@ -9,8 +9,7 @@
         '_meta': ({
             'type': 'boolean'
         }),
-        'reference': true,
-        'current': true
+        'reference': true
     }),
     'falsy reject': ({
         '_meta': ({
@@ -52,20 +51,11 @@
         '_meta': ({
             'type': 'undefined'
         }),
-        'current': undefined,
         'reference': undefined
     }),
     'basic assert': ({
         '_meta': ({
             'type': 'object'
-        }),
-        'current': ({
-            'some pants': ({
-                '_meta': ({
-                    'type': 'string'
-                }),
-                'current': 'llama'
-            })
         }),
         'reference': ({
             'some pants': ({
