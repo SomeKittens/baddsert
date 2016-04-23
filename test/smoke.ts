@@ -24,7 +24,7 @@ describe('smoke tests', () => {
        '_meta': {
          'type': 'string'
        },
-       'reference': 'llama'
+       'current': 'llama'
      }
    });
   });
@@ -72,7 +72,7 @@ describe('smoke tests', () => {
         _meta: {
           type: 'undefined'
         },
-        reference: undefined
+        current: undefined
       }
     });
   });

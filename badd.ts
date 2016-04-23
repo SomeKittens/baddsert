@@ -67,6 +67,18 @@ export let baddsertInject = getStoredResults => {
             throw new Error(`${label}: Expected '${maybeToString(data)}' to equal '${refObj.reference}'.`);
           }
         }
+      } else if (refObj && refObj.hasOwnProperty('current')) {
+        // User has not given us a reference value but is trying to assert against the current value
+        // TODO: have two modes, strict and lax
+
+        console.warn('Attempting to assert value without setting reference, using previous value:' refObj.current);
+        try {
+          deepStrictEqual(refObj.current, data);
+        } catch (e) {
+          let prevCurrent = refObj.current;
+          refObj.current = data;
+          throw new Error(`${label}: Expected '${maybeToString(data)}' to equal '${prevCurrent}'.`);
+        }
       } else {
         // We don't have it, assume correct
         infoLog(`Making new entry for ${label}, populated with ${data}`);
@@ -74,7 +86,7 @@ export let baddsertInject = getStoredResults => {
           _meta: {
             type: typeof data
           },
-          reference: data
+          current: data
         });
       }
     };

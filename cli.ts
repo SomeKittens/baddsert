@@ -21,36 +21,49 @@ let allResults = getAllResults();
 let depth = 0;
 let greenCheck = colors.green('✓');
 
-let fixBadResult = (subKey, resultSet) => {
-  leftLog(depth, colors.red(`X ${subKey}: AGH THEY DON'T MATCH ${colors.trap('DOOOOOOOM')}`));
-  // Not using template functions here so we're not calling .toString on objects
-  leftLog(depth + 1, 'Reference value:', resultSet.reference);
-  leftLog(depth + 1, 'Latest result:', resultSet.current);
-  if (keyInYNStrict('Should I replace this?')) {
-    resultSet.reference = resultSet.current;
-  }
-};
-
 let check = (resultSet, subKey) => {
   depth++;
+  // If there's no _meta, we need to recurse further
   if (!resultSet._meta) {
     leftLog(depth, '-', colors.underline.white(`${subKey}`));
     Object.keys(resultSet).forEach(key => check(resultSet[key], key));
     depth--;
     return;
   }
-  if (!resultSet.current) {
+  // If there's no reference property, this was the first time we saw this key
+  // So we need to check with the user to ensure that this is the right value
+  if (!resultSet.hasOwnProperty('reference')) {
+    leftLog(depth, colors.red(`X ${subKey}: No reference value found`));
+    // Not using template functions here so we're not calling .toString on objects
+    leftLog(depth + 1, 'Latest result:', resultSet.current);
+    if (keyInYNStrict('Use this value?')) {
+      resultSet.reference = resultSet.current;
+    }
+  }
+
+  // If there is a reference property (checked above) and no current, then the test passed
+  // Move along, nothing to see here
+  if (!resultSet.hasOwnProperty('current')) {
     leftLog(depth, `${greenCheck} ${subKey}`);
     depth--;
     return;
   }
 
+
+  // If there are both current & reference properties, we need to ensure they match
+  // If not, a test failed and the user probably wants to update the value there
   try {
     deepStrictEqual(resultSet.reference, resultSet.current);
 
     leftLog(depth, `${greenCheck} ${subKey}`);
   } catch (e) {
-    fixBadResult(subKey, resultSet);
+    leftLog(depth, colors.red(`X ${subKey}: AGH THEY DON'T MATCH ${colors.trap('DOOOOOOOM')}`));
+    // Not using template functions here so we're not calling .toString on objects
+    leftLog(depth + 1, 'Reference value:', resultSet.reference);
+    leftLog(depth + 1, 'Latest result:', resultSet.current);
+    if (keyInYNStrict('Should I replace this?')) {
+      resultSet.reference = resultSet.current;
+    }
   }
   depth--;
 };

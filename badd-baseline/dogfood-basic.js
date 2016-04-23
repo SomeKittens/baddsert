@@ -1,17 +1,4 @@
 ({
-    'basic assert': ({
-        '_meta': ({
-            'type': 'object'
-        }),
-        'reference': ({
-            'some pants': ({
-                '_meta': ({
-                    'type': 'string'
-                }),
-                'reference': 'llama'
-            })
-        })
-    }),
     'throw check': ({
         '_meta': ({
             'type': 'string'
@@ -35,14 +22,7 @@
         '_meta': ({
             'type': 'boolean'
         }),
-        'reference': true,
-        'current': true
-    }),
-    'undef': ({
-        '_meta': ({
-            'type': 'undefined'
-        }),
-        'reference': undefined
+        'reference': true
     }),
     'comparator a': ({
         '_meta': ({
@@ -67,5 +47,33 @@
             'type': 'boolean'
         }),
         'reference': true
+    }),
+    'undef': ({
+        '_meta': ({
+            'type': 'undefined'
+        }),
+        'current': undefined,
+        'reference': undefined
+    }),
+    'basic assert': ({
+        '_meta': ({
+            'type': 'object'
+        }),
+        'current': ({
+            'some pants': ({
+                '_meta': ({
+                    'type': 'string'
+                }),
+                'current': 'llama'
+            })
+        }),
+        'reference': ({
+            'some pants': ({
+                '_meta': ({
+                    'type': 'string'
+                }),
+                'current': 'llama'
+            })
+        })
     })
 })
