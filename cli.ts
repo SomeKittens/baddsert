@@ -6,7 +6,8 @@
 
 import {getAllResults, save} from './badd-fs';
 import {deepStrictEqual} from 'assert';
-import {keyInYN} from 'readline-sync';
+import {keyInYNStrict} from 'readline-sync';
+import * as colors from 'colors';
 
 // Can I use left-pad here?  Absolutely!
 // Would that be a smarter idea in general?  Yes!
@@ -18,17 +19,28 @@ let leftLog = (spaces: number, ...str: string[]): void => {
 
 let allResults = getAllResults();
 let depth = 0;
+let greenCheck = colors.green('✓');
+
+let fixBadResult = (subKey, resultSet) => {
+  leftLog(depth, colors.red(`X ${subKey}: AGH THEY DON'T MATCH ${colors.trap('DOOOOOOOM')}`));
+  // Not using template functions here so we're not calling .toString on objects
+  leftLog(depth + 1, 'Reference value:', resultSet.reference);
+  leftLog(depth + 1, 'Latest result:', resultSet.current);
+  if (keyInYNStrict('Should I replace this?')) {
+    resultSet.reference = resultSet.current;
+  }
+};
 
 let check = (resultSet, subKey) => {
   depth++;
   if (!resultSet._meta) {
-    leftLog(depth, `--- Checking ${subKey} ---`);
+    leftLog(depth, '-', colors.underline.white(`${subKey}`));
     Object.keys(resultSet).forEach(key => check(resultSet[key], key));
     depth--;
     return;
   }
   if (!resultSet.current) {
-    leftLog(depth, `✓ ${subKey}`);
+    leftLog(depth, `${greenCheck} ${subKey}`);
     depth--;
     return;
   }
@@ -36,14 +48,9 @@ let check = (resultSet, subKey) => {
   try {
     deepStrictEqual(resultSet.reference, resultSet.current);
 
-    leftLog(depth, `✓ ${subKey}`);
+    leftLog(depth, `${greenCheck} ${subKey}`);
   } catch (e) {
-    leftLog(depth, `${subKey}: AGH THEY DON'T MATCH DOOOOOOOM`);
-    leftLog(depth, 'Stored resultSet:', resultSet.reference);
-    leftLog(depth, 'Latest:', resultSet.current);
-    if (keyInYN('Should I replace this?')) {
-      resultSet.reference = resultSet.current;
-    }
+    fixBadResult(subKey, resultSet);
   }
   depth--;
 };

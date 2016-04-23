@@ -1,9 +1,12 @@
 {
   "name": "baddsert",
   "version": false,
-  "dependencies": {},
+  "dependencies": {
+    "debug": "registry:npm/debug#2.0.0+20160211003958"
+  },
   "ambientDependencies": {
     "chai": "registry:dt/chai#3.4.0+20160317120654",
+    "colors": "registry:dt/colors#0.6.0-1+20160317120654",
     "mocha": "registry:dt/mocha#2.2.5+20160317120654",
     "node": "registry:dt/node#4.0.0+20160412142033",
     "object-path": "registry:dt/object-path#0.9.0+20160317120654"

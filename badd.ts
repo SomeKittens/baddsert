@@ -3,6 +3,10 @@
 import {deepStrictEqual} from 'assert';
 import {get, set} from 'object-path';
 import {getKey} from './mochaInject';
+import * as debug from 'debug';
+
+let sillyLog = debug('baddsert:silly');
+let infoLog = debug('baddsert:info');
 
 export interface IComparator {
   (a: any, b: any): boolean;
@@ -39,6 +43,7 @@ export let baddsertInject = getStoredResults => {
       let refObj = <IReference>get(stored, keys);
 
       if (refObj && refObj.hasOwnProperty('reference')) {
+        sillyLog(`Asserting ${refObj.reference} is equal to ${data}`);
         // We have a previous result
         if (comparator) {
           // Use the provided comparison tool
@@ -64,7 +69,7 @@ export let baddsertInject = getStoredResults => {
         }
       } else {
         // We don't have it, assume correct
-        // console.log(`Making new entry for ${label}, populated with ${data}`);
+        infoLog(`Making new entry for ${label}, populated with ${data}`);
         set(stored, keys, {
           _meta: {
             type: typeof data

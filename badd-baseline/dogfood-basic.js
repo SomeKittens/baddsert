@@ -22,7 +22,8 @@
         '_meta': ({
             'type': 'boolean'
         }),
-        'reference': true
+        'reference': true,
+        'current': true
     }),
     'falsy reject': ({
         '_meta': ({

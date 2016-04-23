@@ -44,7 +44,7 @@ export let getStoredResults = (filename: string) => {
     asserts = loadFile(filename);
   } catch (e) {
     /* doesn't exist, we'll make it later */
-    console.warn('Could not find file', filename);
+    console.warn('Could not find file:', filename);
     asserts = {};
   }
 

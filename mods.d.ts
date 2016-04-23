@@ -1,7 +1,7 @@
 // Need these otherwise the build breaks, blah
 
 declare namespace readlineSync {
-  export function keyInYN(a: string): boolean;
+  export function keyInYNStrict(a: string): boolean;
 }
 
 declare module 'readline-sync' {
