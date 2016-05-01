@@ -6,9 +6,9 @@
 
 Framework for baseline acceptance driven development in JavaScript.
 
-General idea: It's annoying to maintain tests.  Every time you change an api, all the tests fail and they need to be manually updated.
+It's annoying to maintain tests.  Every time you change an api, all the tests fail and they need to be manually updated.
 
-BADD keeps tracks of the new info on failures and allows you to automagically update the expected data.
+`baddsert` allows you to keep the data of tests separate from the test themselves, allowing you to update each separately for cleaner diffs and sane programmers.  `baddsert` keeps tracks of the newly-provided data on failures and provides a CLI to update the expected data.
 
 ### Use
 
@@ -62,7 +62,7 @@ Add it as a dev dependency (for npm scripts & such)
 $ npm install --save-dev baddsert
 ```
 
-When installing as a dev dependency it is recommended you add this to your npm scripts in your package.json
+When installing as a dev dependency I recommend you add a npm script to your package.json:
 
 ```json
 {
@@ -72,10 +72,10 @@ When installing as a dev dependency it is recommended you add this to your npm s
 }
 ```
 
-Then you can run baddsert as such (without requiring a global install)
+Then you can run baddsert without requiring a global install
 
 ```sh
-$ npm run baddsert
+$ npm run baddsert -s
 ```
 
 Easy as pie.
