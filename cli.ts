@@ -19,7 +19,7 @@ let leftLog = (spaces: number, ...str: string[]): void => {
 
 let allResults = getAllResults();
 let depth = 0;
-let greenCheck = colors.green('✓');
+let greenCheckmark = colors.green('✓');
 
 let check = (resultSet, subKey) => {
   depth++;
@@ -44,7 +44,7 @@ let check = (resultSet, subKey) => {
   // If there is a reference property (checked above) and no current, then the test passed
   // Move along, nothing to see here
   if (!resultSet.hasOwnProperty('current')) {
-    leftLog(depth, `${greenCheck} ${subKey}`);
+    leftLog(depth, `${greenCheckmark} ${subKey}`);
     depth--;
     return;
   }
@@ -55,7 +55,7 @@ let check = (resultSet, subKey) => {
   try {
     deepStrictEqual(resultSet.reference, resultSet.current);
 
-    leftLog(depth, `${greenCheck} ${subKey}`);
+    leftLog(depth, `${greenCheckmark} ${subKey}`);
   } catch (e) {
     leftLog(depth, colors.red(`X ${subKey}: AGH THEY DON'T MATCH ${colors.trap('DOOOOOOOM')}`));
     // Not using template functions here so we're not calling .toString on objects
