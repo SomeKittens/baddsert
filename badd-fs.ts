@@ -13,7 +13,7 @@ let stringify = require('node-stringify');
 
 // When we're first called, ensure the badd dir exists
 let dir;
-let dirName = 'badd-baseline';
+let dirName = '.baselines';
 dir = join('./', dirName);
 
 try {

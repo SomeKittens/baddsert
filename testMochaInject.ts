@@ -12,7 +12,9 @@ import {readFileSync} from 'fs';
 import {join} from 'path';
 import {deepStrictEqual} from 'assert';
 
-let baselines = eval(readFileSync(join('./', 'badd-baseline', 'injected.js'), 'utf-8'));
+import {getStoredResults} from './badd-fs';
+
+let baselines = getStoredResults('injected');
 
 let mochaRun = spawn('mocha', ['--harmony', join(__dirname, 'test', 'inject')]);
 
@@ -26,7 +28,7 @@ mochaRun.stderr.on('data', (data) => {
 
 
 mochaRun.on('close', (code) => {
-  console.log(`child process exited with code ${code}`);
-  let newBaselines = eval(readFileSync(join('./', 'badd-baseline', 'injected.js'), 'utf-8'));
+  console.log(`Mocha tests exited with code ${code}`);
+  let newBaselines = eval(readFileSync(join('./', '.baselines', 'injected.js'), 'utf-8'));
   deepStrictEqual(baselines, newBaselines);
 });
