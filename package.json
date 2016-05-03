@@ -1,6 +1,6 @@
 {
   "name": "baddsert",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Baseline Acceptance Driven Development for JavaScript",
   "main": "dist/index.js",
   "scripts": {
