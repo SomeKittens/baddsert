@@ -58,7 +58,7 @@ let check = (resultSet, subKey) => {
 
     leftLog(depth, `${greenCheckmark} ${subKey}`);
   } catch (e) {
-    leftLog(depth, colors.red(`X ${subKey}: Values don't match`);
+    leftLog(depth, colors.red(`X ${subKey}: Values don't match`));
     // Not using template functions here so we're not calling .toString on objects
     leftLog(depth + 1, 'Reference value:', resultSet.reference);
     leftLog(depth + 1, 'Latest result:', resultSet.current);
