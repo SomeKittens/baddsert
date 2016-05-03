@@ -73,10 +73,6 @@ let check = (resultSet, subKey) => {
 let tests = spawn('npm', ['test', '-s'], {stdio: 'inherit'});
 
 tests.on('close', (code) => {
-  if (code) {
-    console.log(colors.red('--- Tests failed, skipping baseline check ---'));
-    return;
-  }
   console.log('--- BADD baselines ---');
   Object.keys(allResults)
   .forEach(key => {
