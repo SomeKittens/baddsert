@@ -8,12 +8,13 @@ import {getAllResults, save} from './badd-fs';
 import {deepStrictEqual} from 'assert';
 import {keyInYNStrict} from 'readline-sync';
 import * as colors from 'colors';
+import {spawn} from 'child_process';
 
 // Can I use left-pad here?  Absolutely!
 // Would that be a smarter idea in general?  Yes!
 // Will I, because I'm stubborn?  Also yes!
 let leftLog = (spaces: number, ...str: string[]): void => {
-  let spacing = new Array((spaces * 2) + 1).join(' ');
+  let spacing = new Array((spaces * 2)).join(' ');
   console.log(spacing, ...str);
 };
 
@@ -69,14 +70,22 @@ let check = (resultSet, subKey) => {
   depth--;
 };
 
+let tests = spawn('npm', ['test', '-s'], {stdio: 'inherit'});
 
-Object.keys(allResults)
-.forEach(key => {
+tests.on('close', (code) => {
+  if (code) {
+    console.log(colors.red('--- Tests failed, skipping baseline check ---'));
+    return;
+  }
+  console.log('--- BADD baselines ---');
+  Object.keys(allResults)
+  .forEach(key => {
 
-  let resultSet = allResults[key];
-  check(resultSet, key);
+    let resultSet = allResults[key];
+    check(resultSet, key);
 
-  // Always save
-  // Can figure out dirty check if it's worth it.
-  save(key, resultSet);
+    // Always save
+    // Can figure out dirty check if it's worth it.
+    save(key, resultSet);
+  });
 });
