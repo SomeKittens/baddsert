@@ -7,19 +7,17 @@
 import {baddsertInject} from '../badd';
 import {baddsert as realBadd} from '../index';
 
-let realB = realBadd('dogfood-basic');
-
 describe('dogfooding', () => {
   let mockStore;
   let baddsert;
   beforeEach(() => {
     mockStore = {};
-    baddsert = baddsertInject(() => mockStore)('test');
+    baddsert = baddsertInject(() => mockStore);
   });
 
   it('creates new items if not found', () => {
     baddsert('some pants', 'llama');
-    realB('basic assert', mockStore);
+    realBadd('basic assert', mockStore);
   });
 
   it('checks against old data and does fine', () => {
@@ -31,6 +29,7 @@ describe('dogfooding', () => {
       reference: 'pants'
     };
     baddsert('pants', 'pants');
+    realBadd('no mutate', mockStore);
   });
 
   it('should throw if it finds something that does not match', () => {
@@ -46,9 +45,9 @@ describe('dogfooding', () => {
       didThrow = false;
     } catch (e) {
       // pants: Expected pants to equal super llama.
-      realB('throw check', e.message);
+      realBadd('throw check', e.message);
     }
-    realB('throw check did throw', didThrow);
+    realBadd('throw check did throw', didThrow);
   });
 
   it('should reject if passed a different falsy value', () => {
@@ -58,15 +57,15 @@ describe('dogfooding', () => {
       baddsert('falsy check', undefined);
       didThrow = false;
     } catch (e) {
-      // pants: Expected pants to equal super llama.
-      realB('falsy reject', e.message);
+      // falsy reject: Expected 'undefined' to equal 'false'
+      realBadd('falsy reject', e.message);
     }
-    realB('falsy reject did throw', didThrow);
+    realBadd('falsy reject did throw', didThrow);
   });
 
   it('should persist an undefined item', () => {
     // No check, just reading test output, yeaaaahhh...
-    realB('undef', undefined);
+    realBadd('undef', undefined);
   });
 
   it('allows the user to pass a different comparator', () => {
@@ -74,15 +73,15 @@ describe('dogfooding', () => {
     try {
       baddsert('diff comparator', 'moosle0');
       baddsert('diff comparator', 'moosle', (a, b) => {
-        realB('comparator a', a);
-        realB('comparator b', b);
+        realBadd('comparator a', a);
+        realBadd('comparator b', b);
 
         return false;
       });
       didThrow = false;
     } catch (e) {
-      realB('comparator reject', e.message);
+      realBadd('comparator reject', e.message);
     }
-    realB('comparator didThrow', didThrow);
+    realBadd('comparator didThrow', didThrow);
   });
 });

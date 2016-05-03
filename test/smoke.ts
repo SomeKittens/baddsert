@@ -14,7 +14,7 @@ describe('smoke tests', () => {
   let baddsert;
   beforeEach(() => {
     mockStore = {};
-    baddsert = baddsertInject(() => mockStore)('test');
+    baddsert = baddsertInject(() => mockStore);
   });
 
   it('creates new items if not found', () => {

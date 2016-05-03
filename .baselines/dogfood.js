@@ -68,5 +68,26 @@
         }),
         'current': true,
         'reference': true
+    }),
+    'no mutate': ({
+        '_meta': ({
+            'type': 'object'
+        }),
+        'current': ({
+            'pants': ({
+                '_meta': ({
+                    'type': 'denim'
+                }),
+                'reference': 'pants'
+            })
+        }),
+        'reference': ({
+            'pants': ({
+                '_meta': ({
+                    'type': 'denim'
+                }),
+                'reference': 'pants'
+            })
+        })
     })
 })
