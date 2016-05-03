@@ -12,44 +12,77 @@ It's annoying to maintain tests.  Every time you change an api, all the tests fa
 
 ### Use
 
-baddsert replaces your old assert library.  Write your tests as usual, using baddsert as the assert.  Step one is to init the whole shebang:
+baddsert replaces your old assert library.  Write your tests as usual, using baddsert as the assert.  Step one is to import the whole shebang:
 
 ```typescript
-import {baddsert} from 'baddsert';
+// docTests.js
 
-let docTests = baddsert('docTests');
+import {baddsert} from 'baddsert';
 ```
 
-You'll need to init once per file.  Try and make it descriptive of that particular test battery.
+`baddsert` will group the baselines by the filename of the calling file, so make it descriptive!
 
-Now that everything's all init-ifyed, let's use baddsert:
+Now that everything's all set up, let's use baddsert:
 
 ```typescript
 it('runs a superfluous demo test', () => {
   let result = hammertime(`can't touch this`);
-  docTests('I am a steg-o-saurus', result);
+  baddsert('I am a steg-o-saurus', result);
 });
 ```
 
 The first param describes this particular assertion - what are you testing?
 
-The second is the thing you want asserted.
+The second is the value you want checked against the stored baseline value.  If there isn't a stored baseline value, you'll need to approve one (see [CLI section](#CLI) below).
 
-There's an optional third param that allows you to define your own equality.  Otherwise baddsert will just use `deepStrictEqual` from Node's assert package.
+There's an optional third param that allows you to define your own equality.  Otherwise baddsert will just use [`deepStrictEqual`](https://nodejs.org/api/assert.html#assert_assert_deepequal_actual_expected_message) from Node's assert package.
 
-And now, the magic happens.  When you run your tests, baddsert will take the result from the first test and save it under the `badd-baseline` directory (in this case, as the file `docTests`).  Future runs will throw if the value passed in is not `deepStrictEqual` to the original one.
+And now, the magic happens.  When you run your tests, baddsert will take the result from the first test run and save it under the `.baselines` directory (in this case, as the file `docTests.js`).  Future runs will throw if the value passed in is not `deepStrictEqual` to the original one.
 
-When you inevitably change something that makes the tests fail (because your function is correctly returning a new value) run `baddsert` in the same dir as your `badd-baseline` directory.  This will run through all of your asserts, letting you replace the old data with the data that was passed in during the failing test.
+### CLI
+
+When you inevitably change something that makes the tests fail (because your function is correctly returning a new value) run `baddsert` in your root directory.  This will run through all of your asserts, letting you replace the old data with the data that was passed in during the failing test.
+
+The CLI will run `npm test` before cycling through the baselines.  There are three cases:
+
+##### The provided value matched the baseline value
+
+All good, no user input required.
 
 ```
---- Checking docTests ---
-   I am a steg-o-sarus: AGH THEY DON'T MATCH DOOOOOOOM
-Stored result: result
-Latest: NEW SWEET DATAS
+--- BADD baselines ---
+  - dogfood.js
+    ✓ I am a steg-o-sarus
+```
+
+##### The provided value did not match
+
+The CLI will allow you to overwrite the baseline value with the new value.
+
+```
+--- BADD baselines ---
+  - dogfood.js
+    X I am a steg-o-sarus: AGH THEY DON'T MATCH D̸̛̟͈̻̥̦̝͚̬̤͉̪͎̬̺͚̩ͭO̷̸̢̪̞̺̝͈̪̱̭͚̩̭̩̪̗͇̪O̡̮͍͖̞͙͓͔̟̺̬͖̳͍̟̬̮̮̰Ȍͫ̆̔͌̿ͥͣ̀̾̚ ҉͔͔̘͖̪͙̀O̵͚̥͉̠̱̱̱̥̥̹̳͈̼̞͚̖̟̝O̷̼̟͉̜͔̥͉̞̲̠̼̩̳̠̖̝̺͔O̠̳̤̹̟͓̦̖͔̰͍̳͎͕͈̣̻͖̻Ǫ̩͙̦̹̖̫̣̣̩̣͈͇͈̗̜̙̦̙̘M̸̤̯̬̗̳̼̰͖͉̯͚̜̠̱̘͕͙͔
+      Reference value: pants: Expected 'pants' to equal 'super duper llama'.
+      Latest result: pants: Expected 'pants' to equal 'super llama'.
 Should I replace this? [y/n] :
 ```
 
+##### A value was provided but there was no baseline to compare it to
+
+In order to avoid accidentally using an incorrect value as the baseline, all new values must be approved by the operator.
+
+```
+--- BADD baselines ---
+  - dogfood.js
+    X throw check: No reference value found
+      Latest result: pants: Expected 'pants' to equal 'super llama'.
+Use this value? [y/n] :
+```
+
+
 ### Installation
+
 Install the baddsert cli globally:
 
 ```sh
