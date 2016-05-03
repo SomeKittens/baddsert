@@ -7,18 +7,16 @@
 import {baddsert} from '../index';
 import {inject} from '../mochaInject';
 
-let injected = baddsert('injected');
-
 inject();
 
 describe('root describe', () => {
   describe('nested describe', () => {
     it('works inside nesting', () => {
-      injected('nest', true);
+      baddsert('nest', true);
     });
   });
 
   it('works with a single layer of nesting', () => {
-    injected('single', true);
+    baddsert('single', true);
   });
 });
