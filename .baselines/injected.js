@@ -5,7 +5,8 @@
                 '_meta': ({
                     'type': 'boolean'
                 }),
-                'current': true
+                'current': true,
+                'reference': true
             })
         }),
         'nested describe': ({
@@ -14,7 +15,8 @@
                     '_meta': ({
                         'type': 'boolean'
                     }),
-                    'current': true
+                    'current': true,
+                    'reference': true
                 })
             })
         })
