@@ -62,7 +62,7 @@ The CLI will allow you to overwrite the baseline value with the new value.
 ```
 --- BADD baselines ---
   - dogfood.js
-    X I am a steg-o-sarus: AGH THEY DON'T MATCH D̸̛̟͈̻̥̦̝͚̬̤͉̪͎̬̺͚̩ͭO̷̸̢̪̞̺̝͈̪̱̭͚̩̭̩̪̗͇̪O̡̮͍͖̞͙͓͔̟̺̬͖̳͍̟̬̮̮̰Ȍͫ̆̔͌̿ͥͣ̀̾̚ ҉͔͔̘͖̪͙̀O̵͚̥͉̠̱̱̱̥̥̹̳͈̼̞͚̖̟̝O̷̼̟͉̜͔̥͉̞̲̠̼̩̳̠̖̝̺͔O̠̳̤̹̟͓̦̖͔̰͍̳͎͕͈̣̻͖̻Ǫ̩͙̦̹̖̫̣̣̩̣͈͇͈̗̜̙̦̙̘M̸̤̯̬̗̳̼̰͖͉̯͚̜̠̱̘͕͙͔
+    X I am a steg-o-sarus: Values don't match
       Reference value: pants: Expected 'pants' to equal 'super duper llama'.
       Latest result: pants: Expected 'pants' to equal 'super llama'.
 Should I replace this? [y/n] :
