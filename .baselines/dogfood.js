@@ -20,19 +20,6 @@
             })
         })
     }),
-    'throw check': ({
-        '_meta': ({
-            'type': 'string'
-        }),
-        'current': 'pants: Expected \'pants\' to equal \'super llama\'.',
-        'reference': 'pants: Expected \'pants\' to equal \'super llama\'.'
-    }),
-    'throw check did throw': ({
-        '_meta': ({
-            'type': 'boolean'
-        }),
-        'reference': true
-    }),
     'falsy reject': ({
         '_meta': ({
             'type': 'string'
@@ -87,5 +74,19 @@
                 'reference': 'pants'
             })
         })
+    }),
+    'throw check': ({
+        '_meta': ({
+            'type': 'string'
+        }),
+        'current': 'pants: Expected \'pants\' to equal \'super llama\'.',
+        'reference': 'pants: Expected \'pants\' to equal \'super llama\'.'
+    }),
+    'throw check did throw': ({
+        '_meta': ({
+            'type': 'boolean'
+        }),
+        'current': true,
+        'reference': true
     })
 })

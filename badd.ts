@@ -41,9 +41,9 @@ export let baddsertInject = getStoredResults => {
       baselines[filename] = getStoredResults(filename);
     }
 
-    let stored = baselines[filename];
     let keys = getKey();
     keys.push(label);
+    keys.unshift(filename);
 
     // Mreh.  TODO: Better way to handle symbols
     if (typeof data === 'symbol') {
@@ -51,7 +51,7 @@ export let baddsertInject = getStoredResults => {
       console.warn(`Symbol matching is only supported via .toString(): ${data}`);
     }
 
-    let refObj = <IReference>get(stored, keys);
+    let refObj = <IReference>get(baselines, keys);
 
     sillyLog('Got refObj:', refObj);
     if (refObj && refObj.hasOwnProperty('reference')) {
@@ -67,7 +67,7 @@ export let baddsertInject = getStoredResults => {
         }
 
         if (!result) {
-          set(stored, [...keys, 'current'], data);
+          set(baselines, [...keys, 'current'], data);
           throw new Error(`${label}: Expected '${maybeToString(data)}' to equal '${refObj.reference}'.`);
         }
       } else {
@@ -94,7 +94,7 @@ export let baddsertInject = getStoredResults => {
     } else {
       // We don't have it, assume correct
       infoLog(`Making new entry for ${label}, populated with ${data}`);
-      set(stored, keys, {
+      set(baselines, keys, {
         _meta: {
           type: typeof data
         },

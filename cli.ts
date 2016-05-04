@@ -20,7 +20,6 @@ let leftLog = (spaces: number, ...str: string[]): void => {
   console.log(spacing, ...str);
 };
 
-let allResults = getAllResults();
 let depth = 0;
 let greenCheckmark = colors.green('✓');
 
@@ -82,6 +81,7 @@ tests.on('close', (code) => {
     }
   }
   console.log('--- BADD baselines ---');
+  let allResults = getAllResults();
   Object.keys(allResults)
   .forEach(key => {
 
