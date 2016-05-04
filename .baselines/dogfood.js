@@ -31,7 +31,6 @@
         '_meta': ({
             'type': 'boolean'
         }),
-        'current': true,
         'reference': true
     }),
     'falsy reject': ({
@@ -45,7 +44,6 @@
         '_meta': ({
             'type': 'boolean'
         }),
-        'current': true,
         'reference': true
     }),
     'undef': ({

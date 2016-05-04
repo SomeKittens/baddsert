@@ -38,7 +38,7 @@ let check = (resultSet, subKey) => {
   if (!resultSet.hasOwnProperty('reference')) {
     leftLog(depth, colors.red(`X ${subKey}: No reference value found`));
     // Not using template functions here so we're not calling .toString on objects
-    leftLog(depth + 1, 'Latest result:', resultSet.current);
+    leftLog(depth + 1, colors.grey('Latest result:'), resultSet.current);
     if (keyInYNStrict('Use this value?')) {
       resultSet.reference = resultSet.current;
     }
@@ -62,8 +62,8 @@ let check = (resultSet, subKey) => {
   } catch (e) {
     leftLog(depth, colors.red(`X ${subKey}: Values don't match`));
     // Not using template functions here so we're not calling .toString on objects
-    leftLog(depth + 1, 'Reference value:', resultSet.reference);
-    leftLog(depth + 1, 'Latest result:', resultSet.current);
+    leftLog(depth + 1, colors.grey('Reference value:'), resultSet.reference);
+    leftLog(depth + 1, colors.grey('Latest result:'), resultSet.current);
     if (keyInYNStrict('Should I replace this?')) {
       resultSet.reference = resultSet.current;
       delete resultSet.current;
