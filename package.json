@@ -41,7 +41,7 @@
     "mocha": "^2.4.5",
     "node-stringify": "0.0.19",
     "snyk": "^1.14.0",
-    "tslint": "^3.7.4",
+    "tslint": "3.9.x",
     "typescript": "^1.8.10",
     "typings": "^0.8.1",
     "validate-commit-msg": "^2.6.0"
