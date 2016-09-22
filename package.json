@@ -43,7 +43,7 @@
     "snyk": "^1.14.0",
     "tslint": "3.9.x",
     "typescript": "^1.8.10",
-    "typings": "^0.8.1",
+    "typings": "^1.4.0",
     "validate-commit-msg": "^2.6.0"
   },
   "bin": "./dist/cli.js",
