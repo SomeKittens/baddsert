@@ -32,7 +32,7 @@
     "minimist": "^1.2.0",
     "node-stringify": "0.0.19",
     "object-path": "^0.9.2",
-    "readline-sync": "^1.4.1",
+    "readline-sync": "^1.4.6",
     "stack-trace": "0.0.9",
     "typescript": "^1.8.9"
   },
