@@ -39,7 +39,7 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "ghooks": "^1.2.1",
-    "mocha": "^2.4.5",
+    "mocha": "^3.4.0",
     "snyk": "^1.14.0",
     "tslint": "3.9.x",
     "typescript": "^1.8.10",
