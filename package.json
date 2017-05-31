@@ -37,7 +37,7 @@
     "typescript": "^1.8.9"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
+    "chai": "^4.0.1",
     "ghooks": "^1.2.1",
     "mocha": "^2.4.5",
     "snyk": "^1.14.0",
